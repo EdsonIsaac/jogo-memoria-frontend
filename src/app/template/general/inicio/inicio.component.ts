@@ -26,11 +26,16 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {
     this.cardService.findAll().subscribe(cards => {
-      this.cards = cards;
-      console.log(this.cards);
-      $(document).ready(() => {
-        this.buildCards();
-      });
+      
+      if (cards.length >= 12) {
+        this.cards = cards;
+      
+        $(document).ready(() => {
+          this.buildCards();
+        });
+      } else {
+        this.cards = [];
+      }
     });
   }
 
